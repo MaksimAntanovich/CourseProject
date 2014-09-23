@@ -1,4 +1,4 @@
-package entity;
+package site.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -26,10 +26,10 @@ public class User {
     @Size(min = 5, max = 20)
     private String login;
 
-    @Column(name = "e-mail")
+    @Column(name = "email")
     @NotEmpty
     @Size(min = 3, max = 60)
-    private String name;
+    private String email;
 
     @Column(name = "password")
     @NotEmpty
@@ -56,12 +56,12 @@ public class User {
         this.login = login;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

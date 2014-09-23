@@ -1,6 +1,6 @@
-package dto;
+package site.dto;
 
-import entity.User;
+import site.entity.User;
 
 /**
  * Created by maxim on 14.9.21.

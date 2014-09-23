@@ -1,20 +1,22 @@
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:beans="http://www.springframework.org/schema/beans"
-       xmlns:tx="http://www.springframework.org/schema/tx"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans:beans xmlns="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:tx="http://www.springframework.org/schema/tx"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:mvc="http://www.springframework.org/schema/mvc"
+             xmlns:security="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+                            http://www.springframework.org/schema/context
+                            http://www.springframework.org/schema/context/spring-context-4.0.xsd
+                            http://www.springframework.org/schema/mvc
+                            http://www.springframework.org/schema/mvc/spring-mvc.xsd
+                            http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+    http://www.springframework.org/schema/security
+    http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-
-http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-
-
-http://www.springframework.org/schema/context
-
-
-http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-
-    <context:component-scan base-package="java" />
+    <context:component-scan base-package="site" />
 
     <mvc:annotation-driven />
     <beans:bean id="mysqlDataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -28,14 +30,14 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <beans:property name="sessionFactory" ref="sessionFactory"/>
     </beans:bean>
 
-    <tx:annotation-driven/>
+    <tx:annotation-driven />
 
     <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <beans:property name="dataSource" ref="mysqlDataSource"/>
-        <beans:property name="packagesToScan" value="entity"/>
+        <beans:property name="packagesToScan" value="site.entity"/>
         <beans:property name="hibernateProperties">
             <beans:props>
-                <beans:prop key="hibernate.dialect">${hibernate.mysql.dialect}</beans:prop>
+                <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</beans:prop>
                 <beans:prop key="hibernate.max_fetch_depth">2</beans:prop>
                 <beans:prop key="hibernate.jdbc.fetch_size">50</beans:prop>
                 <beans:prop key="hibernate.jdbc.batch_size">8</beans:prop>
@@ -61,7 +63,26 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.
         <beans:property name="suffix" value=".jsp"/>
     </beans:bean>
 
-    <context:annotation-config/>
-    <context:component-scan base-package="java"/>
+    <!--security config-->
+    <security:http auto-config="true"  use-expressions="true">
+        <security:intercept-url pattern="/new**" access="isAuthenticated()"/>
+        <security:form-login
+                login-page="/login.htm"
+                default-target-url="/home.htm"
+                authentication-failure-url="/login.htm?error"
+                username-parameter="login"
+                password-parameter="password" />
+        <security:logout logout-success-url="/home.htm" />
+    </security:http>
 
-</beans>
+
+    <context:annotation-config/>
+    <context:component-scan base-package="site"/>
+
+    <security:authentication-manager>
+        <security:authentication-provider user-service-ref='UserDetailsService'/>
+    </security:authentication-manager>
+
+
+
+</beans:beans>

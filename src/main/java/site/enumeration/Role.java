@@ -1,4 +1,4 @@
-package enumeration;
+package site.enumeration;
 
 /**
  * Created by maxim on 14.9.21.

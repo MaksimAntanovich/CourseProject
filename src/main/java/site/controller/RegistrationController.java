@@ -1,9 +1,9 @@
-package controller;
+package site.controller;
 
-import dao.UserDAO;
-import dto.UserDTO;
-import entity.User;
-import enumeration.Role;
+import site.dao.UserDAO;
+import site.dto.UserDTO;
+import site.entity.User;
+import site.enumeration.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
-package daoimpl;
+package site.daoimpl;
 
-import dao.UserDAO;
-import entity.User;
+import site.dao.UserDAO;
+import site.entity.User;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

@@ -1,6 +1,6 @@
-package dao;
+package site.dao;
 
-import entity.UserRole;
+import site.entity.UserRole;
 
 import java.sql.SQLException;
 

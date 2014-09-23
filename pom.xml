@@ -45,17 +45,55 @@
           <version>4.3.6.Final</version>
       </dependency>
       <dependency>
+          <groupId>org.springframework.security</groupId>
+          <artifactId>spring-security-core</artifactId>
+          <version>3.2.5.RELEASE</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.security</groupId>
+          <artifactId>spring-security-web</artifactId>
+          <version>3.2.5.RELEASE</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springframework.security</groupId>
+          <artifactId>spring-security-config</artifactId>
+          <version>3.2.5.RELEASE</version>
+      </dependency>
+      <dependency>
           <groupId>org.hibernate</groupId>
           <artifactId>hibernate-validator</artifactId>
           <version>5.1.2.Final</version>
       </dependency>
-
       <dependency>
           <groupId>commons-dbcp</groupId>
           <artifactId>commons-dbcp</artifactId>
           <version>1.2.2</version>
       </dependency>
-
+      <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+          <version>5.1.6</version>
+      </dependency>
+      <dependency>
+          <groupId>jstl</groupId>
+          <artifactId>jstl</artifactId>
+          <version>1.2</version>
+      </dependency>
+      <dependency>
+          <groupId>org.springmodules</groupId>
+          <artifactId>spring-modules-validation</artifactId>
+          <version>0.8</version>
+          <exclusions>
+              <exclusion>
+                  <groupId>org.springframework</groupId>
+                  <artifactId>spring</artifactId>
+              </exclusion>
+              <exclusion>
+                  <groupId>org.springframework</groupId>
+                  <artifactId>spring-mock</artifactId>
+              </exclusion>
+          </exclusions>
+      </dependency>
   </dependencies>
   <build>
     <finalName>CourseProject</finalName>

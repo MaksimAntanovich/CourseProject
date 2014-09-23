@@ -1,7 +1,7 @@
-package daoimpl;
+package site.daoimpl;
 
-import dao.UserRoleDAO;
-import entity.UserRole;
+import site.dao.UserRoleDAO;
+import site.entity.UserRole;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
