@@ -32,6 +32,27 @@
 
     <tx:annotation-driven />
 
+    <bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+        <property name="username" value="demodulater@gmail.com" />
+        <property name="password" value="123456qwerty" />
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.host">smtp.gmail.com</prop>
+                <prop key="mail.smtp.port">587</prop>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+        <property name="from" value="demodulater@gmail.com"/>
+        <property name="subject" value="RegHelp"/>
+    </bean>
+    <bean id="sendMail" class="site.serviceimpl.SendMailImpl">
+        <property name="mailSender" ref="mailSender"/>
+        <property name="templateMessage" ref="templateMessage"/>
+    </bean>
+
     <beans:bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <beans:property name="dataSource" ref="mysqlDataSource"/>
         <beans:property name="packagesToScan" value="site.entity"/>

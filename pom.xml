@@ -45,6 +45,11 @@
           <version>4.3.6.Final</version>
       </dependency>
       <dependency>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-context-support</artifactId>
+          <version>4.0.6.RELEASE</version>
+      </dependency>
+      <dependency>
           <groupId>org.springframework.security</groupId>
           <artifactId>spring-security-core</artifactId>
           <version>3.2.5.RELEASE</version>
@@ -93,6 +98,16 @@
                   <artifactId>spring-mock</artifactId>
               </exclusion>
           </exclusions>
+      </dependency>
+      <dependency>
+          <groupId>javax.mail</groupId>
+          <artifactId>mail</artifactId>
+          <version>1.4</version>
+      </dependency>
+      <dependency>
+          <groupId>jaf</groupId>
+          <artifactId>activation</artifactId>
+          <version>1.0.2</version>
       </dependency>
   </dependencies>
   <build>

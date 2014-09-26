@@ -15,21 +15,21 @@ import java.util.Locale;
  */
 @Controller
 public class HomeController {
-
-    @Autowired
+//
+//    @Autowired
 //    @Qualifier("CategoryDAO")
 //    private CategoryDAO categoryDAO;
-
-    @RequestMapping({"", "home.htm" })
-    public String showPage(Model model) throws SQLException {
+//
+//    @RequestMapping({"", "home.htm" })
+//    public String showPage(Model model) throws SQLException {
 //        List<Locale.Category> categories = categoryDAO.getAllCategories();
 //        model.addAttribute("categories", categories);
-        return "commons/home";
-    }
-
-    @RequestMapping(value = "admin.htm")
-    public String showAdminPage(Model model) {
-        model.addAttribute("message", "Hello, admin!");
-        return "commons/home";
-    }
+//        return "commons/home";
+//    }
+//
+//    @RequestMapping(value = "admin.htm")
+//    public String showAdminPage(Model model) {
+//        model.addAttribute("message", "Hello, admin!");
+//        return "commons/home";
+//    }
 }

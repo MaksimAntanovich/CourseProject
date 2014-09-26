@@ -1,5 +1,10 @@
 package site.controller;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import site.dao.UserDAO;
 import site.dto.UserDTO;
 import site.entity.User;
@@ -13,6 +18,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import site.service.SendMail;
+import site.serviceimpl.SendMailImpl;
 
 import javax.validation.Valid;
 import java.sql.SQLException;
@@ -36,6 +43,10 @@ public class RegistrationController {
     @Autowired
     private UserDTO userDTO;
 
+    @Autowired
+    private SendMail MailProvider;
+
+
     @RequestMapping(value = "add_user.htm", method = RequestMethod.POST)
     public String addUser(@Valid @ModelAttribute User user, BindingResult result, Model model) throws SQLException {
         if (result.hasErrors()) {
@@ -43,7 +54,7 @@ public class RegistrationController {
         }
         user = userDTO.buildNewUser(user, Role.USER.toString());
         userDAO.addUser(user);
+        MailProvider.sendMail(user);
         return "redirect: home.htm";
     }
-
 }
