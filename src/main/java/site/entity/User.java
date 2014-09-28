@@ -21,6 +21,7 @@ import java.util.List;
 @Table(name = "users")
 public class User {
     @Id
+
     @Column(name = "login")
     @NotEmpty
     @Size(min = 5, max = 20)
@@ -39,6 +40,17 @@ public class User {
     @ManyToOne(targetEntity = UserRole.class)
     @JoinColumn(name = "role")
     private UserRole role;
+
+    @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
+    private List<Story> stories;
+
+    public List<Story> getStories() {
+        return stories;
+    }
+
+    public void setStories(List<Story> stories) {
+        this.stories = stories;
+    }
 
     public UserRole getRole() {
         return role;
