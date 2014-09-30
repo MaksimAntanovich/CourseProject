@@ -2,14 +2,7 @@ package site.entity;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.util.List;
 
@@ -21,6 +14,10 @@ import java.util.List;
 @Table(name = "users")
 public class User {
     @Id
+    @Column(name = "user_id")
+    @GeneratedValue
+    private Integer id;
+
 
     @Column(name = "login")
     @NotEmpty
@@ -43,6 +40,14 @@ public class User {
 
     @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
     private List<Story> stories;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public List<Story> getStories() {
         return stories;

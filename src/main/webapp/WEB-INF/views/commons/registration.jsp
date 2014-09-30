@@ -22,6 +22,7 @@
     </script>
 </head>
 <body>
+<jsp:include page="../static/header.jsp"/>
 <div style="margin-left: auto; margin-right: auto; max-width: 200px">
     <h2>Sign up</h2>
     <form:form action="/add_user.htm" modelAttribute="user" onsubmit="return validateForm();">

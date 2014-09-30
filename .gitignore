@@ -1,0 +1,13 @@
+*.class
+
+#eclipse files
+*.classpath
+*.project
+.settings/
+
+#idea files
+*.iml
+.idea/
+
+#maven build dirs
+target/

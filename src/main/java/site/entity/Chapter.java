@@ -10,18 +10,30 @@ import javax.persistence.*;
 @Entity
 public class Chapter {
     @Id
+    @Column(name = "chapter_id")
+    @GeneratedValue
+    private Integer id;
 
-    @Column(name = "Title")
+
+    @Column(name = "title")
     @NotEmpty
     private String title;
 
-    @Column(name = "Text")
+    @Column(name = "text")
     @NotEmpty
     private String text;
 
     @ManyToOne(targetEntity = Story.class)
-    @JoinTable(name="story")
+    @JoinColumn(name="story")
     private Story story;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -47,3 +59,4 @@ public class Chapter {
         this.story = story;
     }
 }
+

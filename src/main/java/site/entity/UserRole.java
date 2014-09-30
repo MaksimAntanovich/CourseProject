@@ -1,12 +1,7 @@
 package site.entity;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 
@@ -16,13 +11,25 @@ import java.util.List;
 @Entity
 @Table(name = "roles")
 public class UserRole {
+
     @Id
+    @Column(name = "role_id")
+    @GeneratedValue
+    private Integer id;
 
     @Column(name = "role")
     private String role;
 
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     private List<User> users;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public String getRole() {
         return role;

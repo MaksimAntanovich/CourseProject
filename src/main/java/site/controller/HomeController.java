@@ -20,16 +20,14 @@ public class HomeController {
 //    @Qualifier("CategoryDAO")
 //    private CategoryDAO categoryDAO;
 //
-//    @RequestMapping({"", "home.htm" })
-//    public String showPage(Model model) throws SQLException {
-//        List<Locale.Category> categories = categoryDAO.getAllCategories();
-//        model.addAttribute("categories", categories);
-//        return "commons/home";
-//    }
-//
-//    @RequestMapping(value = "admin.htm")
-//    public String showAdminPage(Model model) {
-//        model.addAttribute("message", "Hello, admin!");
-//        return "commons/home";
-//    }
+    @RequestMapping({"", "home.htm" })
+    public String showPage(Model model) throws SQLException {
+        return "commons/home";
+    }
+
+    @RequestMapping(value = "admin.htm")
+    public String showAdminPage(Model model) {
+        model.addAttribute("message", "Hello, admin!");
+        return "commons/home";
+    }
 }

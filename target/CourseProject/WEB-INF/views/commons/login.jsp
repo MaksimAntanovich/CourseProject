@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page isELIgnored="false" %>
 <html>
 <head>
@@ -14,8 +15,11 @@
     <style>
         #login-box{margin-right: auto; margin-left: auto; max-width: 200px}
     </style>
+    <title>Starter Template for Bootstrap</title>
 </head>
 <body onload='document.loginForm.username.focus();'>
+<jsp:include page="../static/header.jsp"/>
+
 <div id="login-box">
     <h2>Sign in</h2>
 
@@ -30,11 +34,13 @@
           action="<c:url value='/j_spring_security_check' />" method='POST' role="form">
         <div class="form-group">
             <label for="login">Login</label>
-            <input type='text' name='login' id="login" class="form-control">
+            <form:input path="login" id="login" cssClass="form-control"></form:input>
+            <form:errors path="login" cssclass="error"></form:errors>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input type='password' name='password' id="password" class="form-control"/>
+            <form:password path="password" id="password" cssClass="form-control"></form:password>
+            <form:errors path="password" cssclass="error"></form:errors>
         </div>
         <input name="submit" type="submit" value="submit" class="btn btn-default"/>
     </form>
