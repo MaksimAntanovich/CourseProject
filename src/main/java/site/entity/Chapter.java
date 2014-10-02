@@ -8,6 +8,7 @@ import javax.persistence.*;
  * Created by maxim on 14.9.26.
  */
 @Entity
+@Table(name = "chapters")
 public class Chapter {
     @Id
     @Column(name = "chapter_id")
@@ -23,7 +24,7 @@ public class Chapter {
     @NotEmpty
     private String text;
 
-    @ManyToOne(targetEntity = Story.class)
+    @ManyToOne(targetEntity = Story.class,cascade = CascadeType.ALL)
     @JoinColumn(name="story")
     private Story story;
 

@@ -31,19 +31,18 @@
     </c:if>
 
     <form name='loginForm'
-          action="<c:url value='/j_spring_security_check' />" method='POST' role="form">
+          action="<c:url value='/j_spring_security_check' />" method='POST' role="form" >
         <div class="form-group">
             <label for="login">Login</label>
-            <form:input path="login" id="login" cssClass="form-control"></form:input>
-            <form:errors path="login" cssclass="error"></form:errors>
+            <input type='text' name='login' id="login" class="form-control">
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <form:password path="password" id="password" cssClass="form-control"></form:password>
-            <form:errors path="password" cssclass="error"></form:errors>
+            <input type='password' name='password' id="password" class="form-control"/>
         </div>
         <input name="submit" type="submit" value="submit" class="btn btn-default"/>
     </form>
+
 </div>
 
 </body>

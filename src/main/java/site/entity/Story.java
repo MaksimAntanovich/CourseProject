@@ -7,7 +7,7 @@ import java.util.List;
  * Created by maxim on 14.9.27.
  */
 @Entity
-
+@Table(name = "stories")
 public class Story {
     @Id
     @Column(name = "story_id")
@@ -19,7 +19,7 @@ public class Story {
     @JoinColumn(name = "author")
     private User author;
 
-    @OneToMany(mappedBy = "story",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "story",fetch = FetchType.EAGER)
     private List<Chapter> chapters;
 
 

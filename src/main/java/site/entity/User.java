@@ -15,7 +15,7 @@ import java.util.List;
 public class User {
     @Id
     @Column(name = "user_id")
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
 
@@ -34,11 +34,11 @@ public class User {
     @Size(min = 5, max = 20)
     private String password;
 
-    @ManyToOne(targetEntity = UserRole.class)
+    @ManyToOne(targetEntity = UserRole.class,cascade = CascadeType.ALL)
     @JoinColumn(name = "role")
     private UserRole role;
 
-    @OneToMany(mappedBy = "author",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
     private List<Story> stories;
 
     public Integer getId() {
