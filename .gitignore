@@ -11,3 +11,5 @@
 
 #maven build dirs
 target/
+
+src/main/webapp/clean-blog/
