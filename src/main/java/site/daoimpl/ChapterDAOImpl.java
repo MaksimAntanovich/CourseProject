@@ -1,36 +1,34 @@
 package site.daoimpl;
 
 import org.apache.log4j.Logger;
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import site.dao.StoryDAO;
+import site.dao.ChapterDAO;
 import site.entity.Chapter;
-import site.entity.Story;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 /**
- * Created by maxim on 14.10.2.
+ * Created by maxim on 14.9.30.
  */
 @Transactional
-public class StoryDAOImpl implements StoryDAO{
+@Repository("ChapterDAO")
+public class ChapterDAOImpl implements ChapterDAO {
     @Autowired
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
-    private static final Logger logger = Logger.getLogger(StoryDAOImpl.class);
-
+    private static final Logger logger = Logger.getLogger(ChapterDAOImpl.class);
 
     @Override
-    public void addStory(Story story){
+    public void addChapter(Chapter chapter){
         Session session = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            session.save(story);
+            session.save(chapter);
             session.getTransaction().commit();
         } catch (Exception e) {
             logger.trace(e);
@@ -42,14 +40,12 @@ public class StoryDAOImpl implements StoryDAO{
     }
 
     @Override
-    public Story getStory(String title){
+    public void deleteChapter(Chapter chapter){
         Session session = null;
-        Story story = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            story = (Story) session.load(Story.class, title);
-            Hibernate.initialize(story.getChapters());
+            session.delete(chapter);
             session.getTransaction().commit();
         } catch (Exception e) {
             logger.trace(e);
@@ -58,36 +54,16 @@ public class StoryDAOImpl implements StoryDAO{
                 session.close();
             }
         }
-        return story;
-    }
 
-
-    @Override
-    public ArrayList<Story> getAllStories(){
-        Session session = null;
-        ArrayList<Story> categories = null;
-        try {
-            session = sessionFactory.openSession();
-            session.beginTransaction();
-            categories = (ArrayList<Story>) session.createCriteria(Story.class).list();
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            logger.trace(e);
-        } finally {
-            if (session != null && session.isOpen()) {
-                session.close();
-            }
-        }
-        return categories;
     }
 
     @Override
-    public void deleteStory(Story story){
+    public void updateChapter(Chapter chapter){
         Session session = null;
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            session.delete(story);
+            session.update(chapter);
             session.getTransaction().commit();
         } catch (Exception e) {
             logger.trace(e);

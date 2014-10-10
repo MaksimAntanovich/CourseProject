@@ -2,6 +2,7 @@ package site.dtoimpl;
 
 import org.springframework.stereotype.Service;
 import site.dto.StoryDTO;
+import site.entity.Chapter;
 import site.entity.Story;
 import site.entity.User;
 
@@ -15,4 +16,10 @@ public class StoryDTOImpl implements StoryDTO {
         story.setAuthor(author);
         return story;
     }
+
+    @Override
+    public void addChapter(Story story, Chapter chapter){
+        story.getChapters().add(chapter);
+    }
+
 }

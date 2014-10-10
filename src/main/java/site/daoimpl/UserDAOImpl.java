@@ -1,5 +1,9 @@
 package site.daoimpl;
 
+import org.apache.log4j.Logger;
+import org.hibernate.criterion.Expression;
+import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
 import site.dao.UserDAO;
 import site.entity.User;
 import org.hibernate.Hibernate;
@@ -9,14 +13,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.swing.*;
+import java.util.List;
 
 /**
  * Created by maxim on 14.9.21.
  */
+@Transactional
 @Repository("UserDAO")
 public class UserDAOImpl implements UserDAO {
     @Autowired
     private SessionFactory sessionFactory;
+
+    private static final Logger logger = Logger.getLogger(UserDAOImpl.class);
 
     @Override
     public void addUser(User user){
@@ -27,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
             session.save(user);
             session.getTransaction().commit();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "insert exception", JOptionPane.OK_OPTION);
+            logger.trace(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -42,11 +50,11 @@ public class UserDAOImpl implements UserDAO {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            user = (User) session.get(User.class, login);
+            user = (User) session.createCriteria(User.class).add( Restrictions.like("login",login)).list().get(0);
             Hibernate.initialize(user);
             session.getTransaction().commit();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "insert exception", JOptionPane.OK_OPTION);
+            logger.trace(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -64,7 +72,7 @@ public class UserDAOImpl implements UserDAO {
             session.delete(user);
             session.getTransaction().commit();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "insert exception", JOptionPane.OK_OPTION);
+            logger.trace(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -81,7 +89,7 @@ public class UserDAOImpl implements UserDAO {
             session.update(user);
             session.getTransaction().commit();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "insert exception", JOptionPane.OK_OPTION);
+            logger.trace(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

@@ -1,5 +1,7 @@
 package site.daoimpl;
 
+import org.apache.log4j.Logger;
+import org.springframework.transaction.annotation.Transactional;
 import site.dao.UserRoleDAO;
 import site.entity.UserRole;
 import org.hibernate.Hibernate;
@@ -13,10 +15,13 @@ import javax.swing.*;
 /**
  * Created by maxim on 14.9.21.
  */
+@Transactional
 @Repository("UserRoleDAO")
 public class UserRoleDAOImpl implements UserRoleDAO{
     @Autowired
     private SessionFactory sessionFactory;
+
+    private static final Logger logger = Logger.getLogger(UserRoleDAOImpl.class);
 
     @Override
     public void addRole(UserRole role){
@@ -27,7 +32,7 @@ public class UserRoleDAOImpl implements UserRoleDAO{
             session.save(role);
             session.getTransaction().commit();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "insert exception", JOptionPane.OK_OPTION);
+            logger.trace(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();
@@ -46,7 +51,7 @@ public class UserRoleDAOImpl implements UserRoleDAO{
             Hibernate.initialize(userRole);
             session.getTransaction().commit();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "insert exception", JOptionPane.OK_OPTION);
+            logger.trace(e);
         } finally {
             if (session != null && session.isOpen()) {
 
@@ -65,7 +70,7 @@ public class UserRoleDAOImpl implements UserRoleDAO{
             session.delete(role);
             session.getTransaction().commit();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getMessage(), "insert exception", JOptionPane.OK_OPTION);
+            logger.trace(e);
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

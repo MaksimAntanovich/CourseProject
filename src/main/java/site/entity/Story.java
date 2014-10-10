@@ -1,7 +1,11 @@
 package site.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by maxim on 14.9.27.
@@ -20,8 +24,18 @@ public class Story {
     private User author;
 
     @OneToMany(mappedBy = "story",fetch = FetchType.EAGER)
-    private List<Chapter> chapters;
+    private Set<Chapter> chapters;
 
+    @Column(name = "Rating")
+    Double rating;
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
 
     public Integer getId() {
         return id;
@@ -39,11 +53,11 @@ public class Story {
         this.author = author;
     }
 
-    public List<Chapter> getChapters() {
+    public Set<Chapter> getChapters() {
         return chapters;
     }
 
-    public void setChapters(List<Chapter> chapters) {
+    public void setChapters(Set<Chapter> chapters) {
         this.chapters = chapters;
     }
 }

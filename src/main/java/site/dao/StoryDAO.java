@@ -1,5 +1,6 @@
 package site.dao;
 
+import site.entity.Chapter;
 import site.entity.Story;
 
 import java.sql.SQLException;
@@ -13,5 +14,4 @@ public interface StoryDAO {
     Story getStory(String title) throws  SQLException;
     ArrayList<Story> getAllStories() throws SQLException;
     void deleteStory(Story story) throws SQLException;
-
 }

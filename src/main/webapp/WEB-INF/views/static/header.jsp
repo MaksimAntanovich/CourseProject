@@ -15,13 +15,19 @@
     <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="starter-template.css" rel="stylesheet">
+    <link href="bootstrap/css/starter-template.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen" href="bootstrap/css/bootstrap-markdown.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/bootstrap-markdown.js"></script>
+    <script src="bootstrap/js/markdown.js"></script>
+    <script src="bootstrap/js/to-markdown.js"></script>
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
