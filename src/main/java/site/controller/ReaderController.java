@@ -1,43 +1,39 @@
 package site.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import site.dao.StoryDAO;
 import site.dao.UserDAO;
 import site.entity.Story;
 import site.entity.User;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 /**
- * Created by maxim on 14.9.23.
+ * Created by maxim on 14.10.13.
  */
 @Controller
-public class HomeController {
+public class ReaderController {
+    @Autowired
+    StoryDAO storyDAO;
 
     @Autowired
-    private StoryDAO storyDAO;
+    UserDAO userDAO;
 
-    @Autowired
-    private UserDAO userDAO;
-
-    @RequestMapping({"", "home.htm" })
-    public String showPage(Model model) throws SQLException {
-        ArrayList<Story> stories = storyDAO.getAllStories();
-        model.addAttribute("stories",stories);
+    @RequestMapping("read.htm")
+    public String readStory(Model model,@RequestParam String title,@RequestParam Integer id)throws SQLException{
+        Story story = storyDAO.getStory(title);
+        model.addAttribute("story",story);
+        model.addAttribute("text",story.getChapters().get(id-1).getText());
         Authentication authentic = SecurityContextHolder.getContext().getAuthentication();
         String login = authentic.getName();
         User user = userDAO.getUser(login);
         model.addAttribute("user",user);
-        return "commons/home";
+        return "commons/read";
     }
-
 }

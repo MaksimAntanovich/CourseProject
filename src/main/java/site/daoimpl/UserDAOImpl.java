@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -94,6 +95,25 @@ public class UserDAOImpl implements UserDAO {
             if (session != null && session.isOpen()) {
                 session.close();
             }
+        }
+    }
+
+    @Override
+    public List<User> getAllUsers(){
+        Session session = null;
+        List<User> users = null;
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            users = session.createCriteria(User.class).list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            logger.trace(e);
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+            return users;
         }
     }
 }

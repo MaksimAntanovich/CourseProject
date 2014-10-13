@@ -5,6 +5,7 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.web.bind.annotation.RequestParam;
 import site.dao.UserDAO;
 import site.dto.UserDTO;
 import site.entity.User;
@@ -54,7 +55,15 @@ public class RegistrationController {
         }
         user = userDTO.buildNewUser(user, Role.USER.toString());
         userDAO.addUser(user);
+
         MailProvider.sendMail(user);
+        return "redirect: home.htm";
+    }
+
+    @RequestMapping(value = "activate.htm")
+    public String activateUser( Model model,@RequestParam String username) throws SQLException {
+        User user = userDAO.getUser(username);
+        user.setLocked(false);
         return "redirect: home.htm";
     }
 }

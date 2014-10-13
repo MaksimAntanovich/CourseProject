@@ -12,5 +12,5 @@ import java.sql.SQLException;
 public interface StoryDTO {
     Story buildNewStory(Story story,User author);
 
-    void addChapter(Story story,Chapter chapter);
+    Story addChapter(Story story,Chapter chapter);
 }

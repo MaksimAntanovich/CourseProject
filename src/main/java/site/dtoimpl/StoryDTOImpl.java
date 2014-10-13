@@ -18,8 +18,9 @@ public class StoryDTOImpl implements StoryDTO {
     }
 
     @Override
-    public void addChapter(Story story, Chapter chapter){
+    public Story addChapter(Story story, Chapter chapter){
         story.getChapters().add(chapter);
+        return story;
     }
 
 }

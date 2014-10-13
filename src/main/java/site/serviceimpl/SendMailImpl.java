@@ -24,7 +24,8 @@ public class SendMailImpl implements SendMail {
         msg.setTo(user.getEmail());
         msg.setText(
                 "Dear " + user.getLogin()
-                        + ", welcome. Please verify your email ");
+                        + ", welcome. Please verify your email" +
+                        " <a href=\"http://www.localhost:8080/activate.htm?username=" + user.getLogin() + "\">Activate</a>  ");
         this.mailSender.send(msg);
     }
 

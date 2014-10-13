@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page isELIgnored="false" %>
 <html>
 <head>
@@ -27,14 +28,10 @@
     </c:if>
     <form name='loginForm'
           action="<c:url value='/j_spring_security_check' />" method='POST' role="form">
-        <div class="form-group">
-            <label for="login">Login</label>
-            <input type='text' name='login' id="login" class="form-control">
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type='password' name='password' id="password" class="form-control"/>
-        </div>
+        <label for="login">Login</label>
+        <input  type='text' name='login' id="login" class="form-control" />
+        <label for="password">Password</label>
+        <input  type='password' name='password' id="password" class="form-control"/>
         <input name="submit" type="submit" value="submit" class="btn btn-default"/>
     </form>
 </div>

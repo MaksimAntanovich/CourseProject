@@ -1,5 +1,7 @@
 package site.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
@@ -24,8 +26,9 @@ public class Chapter {
     @NotEmpty
     private String text;
 
-    @ManyToOne(targetEntity = Story.class,cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = Story.class)
     @JoinColumn(name="story")
+    @Fetch(FetchMode.SELECT)
     private Story story;
 
     public Integer getId() {

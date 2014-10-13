@@ -10,19 +10,38 @@
 <%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title>${user.name}</title>
+    <title>${user.login}</title>
 </head>
 <body>
 <jsp:include page="../static/header.jsp"/>
 <div style="text-align: center">
-    <h1>User's info</h1>
-    Login: ${user.login}<br>
-    Email: ${user.email}<br>
-    Role: ${user.role.role}<br>
-    Tasks<br>
-    <c:forEach items="${user.stories}" var="story">
-        <a href="/story.htm?id=${story.id}">${story.title}</a><br>
-    </c:forEach>
+    <h1>Hello, ${user.login}</h1>
+    <h3>Your stories</h3>
+    <c:if test="${not empty user.stories}">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Story Title</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <c:forEach items="${user.stories}" var="story">
+            <tr>
+                <td>${story.title}</td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-primary" href="/story.htm?title=${story.title}">Edit</a>
+                        <a class="btn btn-danger" href="/delete_story.htm?title=${story.title}">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table>
+    </c:if>
+
+    <a class="btn btn-default" href="/newstory.htm">Write new story</a>
 </div>
 </body>
 </html>

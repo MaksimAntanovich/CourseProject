@@ -7,18 +7,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isELIgnored="false" %>
 <html>
 <head>
-    <title></title>
+    <title>Edit Chapter</title>
 </head>
 <body>
 <jsp:include page="../static/header.jsp"/>
-<h2>Sign up</h2>
-<form:form action="/add_chapter.htm" modelAttribute="chapter" >
-    <form>
-        <input name="title" type="text" placeholder="Title?" />
-        <textarea name="text" data-provide="markdown" rows="10"></textarea>
-    </form>
+<form:form action="/add_chapter.htm" modelAttribute="chapter" method='POST' role="form">
+    <form:label path="title">Title</form:label>
+    <form:input name="title" id="title" path="title" type="text" placeholder="Title?" />
+    <form:textarea name="text" id="text" path="text" data-provide="markdown" data-width="400" rows="10" />
     <input type="submit" value="Submit" class="btn btn-default"/>
 </form:form>
 </div>

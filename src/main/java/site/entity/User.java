@@ -42,7 +42,15 @@ public class User {
     private UserRole role;
 
     @OneToMany(mappedBy = "author",fetch = FetchType.EAGER)
-    private List<Story> stories;
+    @Fetch (FetchMode.SELECT)
+    private Set<Story> stories;
+
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER)
+    @Fetch (FetchMode.SELECT)
+    private List<Annotation> annotations;
+
+    @Column(name = "locked")
+    private boolean locked = true;
 
     public Integer getId() {
         return id;
@@ -52,11 +60,11 @@ public class User {
         this.id = id;
     }
 
-    public List<Story> getStories() {
+    public Set<Story> getStories() {
         return stories;
     }
 
-    public void setStories(List<Story> stories) {
+    public void setStories(Set<Story> stories) {
         this.stories = stories;
     }
 
@@ -90,5 +98,21 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Annotation> getAnnotations() {
+        return annotations;
+    }
+
+    public void setAnnotations(List<Annotation> annotations) {
+        this.annotations = annotations;
+    }
+
+    public boolean isLocked() {
+        return locked;
+    }
+
+    public void setLocked(boolean locked) {
+        this.locked = locked;
     }
 }
